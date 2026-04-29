@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vehicle Rental System</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f5f5f5;
+}
+
+/* HEADER */
+header {
+    background: #222;
+    color: white;
+    padding: 15px;
+    text-align: center;
+}
+
+/* NAVBAR */
+nav {
+    background: #444;
+    padding: 10px;
+    text-align: center;
+}
+nav a {
+    color: white;
+    margin: 10px;
+    text-decoration: none;
+}
+
+/* CONTAINER */
+.container {
+    padding: 20px;
+}
+
+/* VEHICLE CARDS */
+.card {
+    background: white;
+    border-radius: 10px;
+    padding: 15px;
+    margin: 10px;
+    display: inline-block;
+    width: 250px;
+    box-shadow: 0px 2px 8px rgba(0,0,0,0.2);
+}
+
+.card h3 {
+    margin: 5px 0;
+}
+
+.price {
+    color: green;
+    font-weight: bold;
+}
+
+/* BUTTON */
+button {
+    background: #28a745;
+    color: white;
+    border: none;
+    padding: 10px;
+    width: 100%;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+button:hover {
+    background: #218838;
+}
+
+/* FORM */
+.form-section {
+    margin-top: 30px;
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+input, select {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+}
+
+/* FOOTER */
+footer {
+    text-align: center;
+    padding: 15px;
+    background: #222;
+    color: white;
+    margin-top: 20px;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<h1>🚗 Vehicle Rental System</h1>
+<p>Rent Premium & Economy Vehicles Easily</p>
+</header>
+
+<nav>
+<a href="#">Home</a>
+<a href="#">Vehicles</a>
+<a href="#">Contact</a>
+</nav>
+
+<div class="container">
+
+<h2>Available Vehicles</h2>
+
+<!-- PREMIUM CAR -->
+<div class="card">
+<h3>BMW X5</h3>
+<p>Premium Car</p>
+<p class="price">₹3000/day</p>
+<button onclick="selectVehicle('BMW X5')">Book</button>
+</div>
+
+<!-- ECONOMY CAR -->
+<div class="card">
+<h3>Maruti Swift</h3>
+<p>Economy Car</p>
+<p class="price">₹1000/day</p>
+<button onclick="selectVehicle('Swift')">Book</button>
+</div>
+
+<!-- TRUCK -->
+<div class="card">
+<h3>Tata Truck</h3>
+<p>Heavy Vehicle</p>
+<p class="price">₹2000/day</p>
+<button onclick="selectVehicle('Truck')">Book</button>
+</div>
+
+<!-- BIKE -->
+<div class="card">
+<h3>Yamaha R15</h3>
+<p>Motorcycle</p>
+<p class="price">₹800/day</p>
+<button onclick="selectVehicle('R15')">Book</button>
+</div>
+
+<!-- BOOKING FORM -->
+<div class="form-section">
+<h2>Book Your Vehicle</h2>
+
+<label>Selected Vehicle:</label>
+<input type="text" id="vehicle" readonly>
+
+<label>Number of Days:</label>
+<input type="number" id="days" placeholder="Enter days">
+
+<label>
+<input type="checkbox" id="driver"> Include Driver (₹500/day)
+</label>
+
+<button onclick="calculate()">Calculate Price</button>
+
+<h3 id="result"></h3>
+</div>
+
+</div>
+
+<footer>
+<p>© 2026 Vehicle Rental System</p>
+</footer>
+
+<script>
+function selectVehicle(name) {
+    document.getElementById("vehicle").value = name;
+}
+
+function calculate() {
+    let vehicle = document.getElementById("vehicle").value;
+    let days = document.getElementById("days").value;
+    let driver = document.getElementById("driver").checked;
+
+    if (!vehicle || !days) {
+        alert("Please fill all fields");
+        return;
+    }
+
+    let price = 0;
+
+    if (vehicle === "BMW X5") price = 3000 * days * 1.5;
+    else if (vehicle === "Swift") price = 1000 * days;
+    else if (vehicle === "Truck") price = 2000 * days + 500;
+    else if (vehicle === "R15") price = 800 * days * 0.8;
+
+    if (driver) price += 500 * days;
+
+    document.getElementById("result").innerText =
+        "Total Cost: ₹" + price;
+}
+</script>
+
+</body>
+</html>
